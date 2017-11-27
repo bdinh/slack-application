@@ -1,0 +1,19 @@
+.form-container {
+    margin-top: 3em;
+}
+
+.new-account-text {
+    text-align: center;
+}
+
+.login-button {
+    width: 100%;
+}
+
+.form-valid {
+    border-color: green;
+}
+
+.form-invalid {
+    border-color: #FF0000;
+}
