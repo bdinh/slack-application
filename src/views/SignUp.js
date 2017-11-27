@@ -1,0 +1,108 @@
+import React, { Component } from 'react';
+import { bindAll } from 'lodash';
+import $ from 'jquery';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
+export default class SignUpView extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            password: "",
+            displayName: "",
+            validCredential: false,
+        };
+        bindAll(this, [
+            'checkCredentials'
+        ]);
+    }
+
+    checkPassword(event) {
+        let password = event.target.value;
+        if (password.length > 5) {
+            $('.signup-button').prop('disabled', false);
+        } else {
+            $('.signup-button').prop('disabled', true);
+        }
+    }
+
+    checkCredentials(event) {
+        let email = $('#createEmail').val();
+        let password = $('#createPassword').val();
+        let displayName = $('#createDisplayName').val();
+
+        console.log("hello");
+
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((firebaseUser) => {
+                console.log('User created: ' + firebaseUser.uid);
+                firebaseUser.updateProfie({
+                    displayName: displayName,
+                })
+
+            })
+            .catch((error) => { //report any errors
+                console.log(error.message);
+            });
+
+    }
+
+
+    render() {
+
+
+        return (
+        <div className="container form-container col-6 offset-3">
+            <form onSubmit={this.checkCredentials}>
+
+                <div className="form-group">
+                    <label
+                        className="form-labels"
+                        htmlFor="createDisplayName">
+                        Display Name
+                        <span className="faded-text"> (only letters, numbers, and underscores)</span>
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="createDisplayName"
+                        aria-describedby="displayNameHelp"
+                        placeholder="Enter Display Name"
+                    />
+                </div>
+                <div className="form-group">
+                    <label className="form-labels" htmlFor="createEmail">Email address</label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        id="createEmail"
+                        aria-describedby="emailHelp"
+                        placeholder="Enter email"
+                    />
+                </div>
+                <div className="form-group">
+                    <label
+                        className="form-labels"
+                        htmlFor="createPassword">
+                        Password
+                        <span className="faded-text"> (minimum 6 character)</span>
+                    </label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        id="createPassword"
+                        placeholder="Password"
+                        onChange={this.checkPassword}
+                    />
+                </div>
+                <button
+                    disabled={true}
+                    type="submit"
+                    className="btn btn-primary signup-button">Create Account</button>
+            </form>
+        </div>
+        );
+    }
+
+}

@@ -1,3 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+.App {
+    height: 100vh;
+}
+
+.dashboard-container {
+    height: 100%;
+}
+
 .form-container {
     margin-top: 3em;
 }
@@ -6,14 +18,120 @@
     text-align: center;
 }
 
-.login-button {
+.login-button, .signup-button {
     width: 100%;
 }
 
-.form-valid {
-    border-color: green;
+.split {
+    width: 50%;
 }
 
-.form-invalid {
-    border-color: #FF0000;
+.faded-text {
+    color: #868e96;
+}
+
+.navigation-menu {
+    height: 100%;
+    border: 1px solid black;
+    padding: 0!important;
+    background-color: #443642;
+    color: rgba(255,255,255,0.15);
+}
+
+.user-settings {
+    height: 10%;
+    border: 1px solid black;
+}
+
+.channel-navigation {
+    height: 90%;
+    font-size: 1.5em;
+    /*text-align: center;*/
+    padding-top: 1em;
+    margin-left: 2em;
+}
+
+.user-button {
+    /*text-align: center;*/
+    margin-top: 0.5em;
+    font-size: 2em;
+    margin-left: 2em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.sign-out-button {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 1em;
+}
+
+.chat-header {
+    height: 10%;
+    background-color: #dddddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.chat-panel {
+    padding: 0!important;
+    height: 100%;
+}
+
+.chat-utility {
+    height: 10%;
+    background-color: #dddddd;
+    box-shadow: 0 0px 5px 0 rgba(0,0,0,0.12), 0 0px 5px 0 rgba(0,0,0,0.24);
+
+}
+
+.chat-display {
+    height: 80%;
+    background-color: #dddddd6b;
+}
+
+textarea.text-input {
+    border-radius: 20px;
+    /*display: inline-block;*/
+}
+
+.input-container {
+    width: 85%;
+    display: inline-block;
+    /*margin-top: 1em;*/
+    height: 100%;
+    /*margin-left: 1em;*/
+    padding-top: 1em;
+}
+
+.send-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.inline-container {
+    width: 15%;
+    text-align: center;
+    display: inline-block;
+    height: 100%;
+
+}
+
+.send-button, .sign-out-button {
+    position: absolute;
+    background-color: #3EB890;
+    color: #FFFFFF;
+}
+
+.send-button {
+    font-size: 1.5em;
+}
+
+div.form-group {
+    margin: 0;
+    padding-left: 1em;
+    height: 100%;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { bindAll } from 'lodash';
+import { Link } from 'react-router-dom';
 
 export default class LoginView extends Component {
     constructor(props) {
@@ -7,6 +8,7 @@ export default class LoginView extends Component {
         this.state = {
             email: "",
             password: "",
+            displayName: "",
             validCredential: false,
         };
         bindAll(this, [
@@ -19,7 +21,6 @@ export default class LoginView extends Component {
 
 
     }
-
 
     render() {
 
@@ -46,7 +47,7 @@ export default class LoginView extends Component {
                             placeholder="Password"/>
                     </div>
                     <div className="new-account-text">
-                        <p>Don't have an account? <a href="">Join</a></p>
+                        <p>Don't have an account? <Link to='./join'>Join</Link></p>
                     </div>
                     <button type="submit" className="btn btn-primary login-button" onClick={this.checkCredentials}>Login</button>
                 </form>

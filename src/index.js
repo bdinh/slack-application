@@ -6,15 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-let config = {
-    apiKey: "AIzaSyAVu-yWQVgP-NQMz9xuKxjMJTfdDK5bNKw",
-    authDomain: "react-chat-3c399.firebaseapp.com",
-    databaseURL: "https://react-chat-3c399.firebaseio.com",
-    projectId: "react-chat-3c399",
-    storageBucket: "",
-    messagingSenderId: "132053997914"
-};
-firebase.initializeApp(config);
+import { BrowserRouter } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();
