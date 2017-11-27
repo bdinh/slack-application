@@ -8,6 +8,7 @@ import LoginView from './views/Login';
 import SignUpView from './views/SignUp';
 import { Switch, Route } from 'react-router-dom';
 import firebase from 'firebase/app';
+import UtilityBar from './components/utilitybar';
 
 let config = {
     apiKey: "AIzaSyAVu-yWQVgP-NQMz9xuKxjMJTfdDK5bNKw",
@@ -63,18 +64,7 @@ class App extends Component {
 
               {/*</div>*/}
             </div>
-            <div className="chat-utility">
-              <div className="form-group">
-                <div className="input-container">
-                  <textarea className="form-control text-input" rows="2" id="comment"/>
-                </div>
-                <div className="inline-container">
-                  <div className="send-button-container">
-                    <button className="btn send-button" type="button">Send</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <UtilityBar/>
 
 
           </div>
