@@ -11,9 +11,6 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import firebase from 'firebase/app';
 import CreateChannel from './views/CreateChannel';
 
-
-
-
 let config = {
     apiKey: "AIzaSyAVu-yWQVgP-NQMz9xuKxjMJTfdDK5bNKw",
     authDomain: "react-chat-3c399.firebaseapp.com",
@@ -24,7 +21,8 @@ let config = {
 };
 firebase.initializeApp(config);
 
-
+// Main wrapper component in our application that handles the routing for our application as well
+// as manages top level information in order to pass it on to other props
 class App extends Component {
     constructor(props) {
         super(props);
@@ -150,7 +148,6 @@ class App extends Component {
                     this.setState({
                         errorMessage: error
                     });
-                    // An error happened.
                 });
 
                 this.setState({

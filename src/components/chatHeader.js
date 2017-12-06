@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
+// Component that contains information about the state of the current active channel
 export default class ChatHeader extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
 
         }
     }
 
-
     render() {
 
         const {
             activeChannel,
-            channelType,
-            inviteState,
             channelPurpose,
+            channelType,
             channelUsers,
+            inviteState,
             toggleInvite
         } = this.props;
 

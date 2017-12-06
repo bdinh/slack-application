@@ -7,7 +7,6 @@ export default class UserTab extends Component {
     }
 
     render() {
-
         const {
             displayName,
         } = this.props;

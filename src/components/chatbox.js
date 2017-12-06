@@ -4,7 +4,7 @@ import moment from 'moment';
 import FontAwesome from 'react-fontawesome';
 import '../css/font-awesome/css/font-awesome.css';
 
-
+// Component that contains the actual chat box in our log of submitted chat messages
 export default class Message extends Component {
     constructor(props) {
         super(props)
@@ -92,7 +92,6 @@ export default class Message extends Component {
                 )
             }
         }
-
         return (
             renderMessage()
         )

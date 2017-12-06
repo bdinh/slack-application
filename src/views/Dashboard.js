@@ -8,8 +8,6 @@ import firebase from 'firebase/app';
 import { Redirect } from 'react-router-dom';
 import { bindAll } from 'lodash';
 import $ from 'jquery';
-import moment from 'moment';
-
 
 export default class Dashboard extends Component {
     constructor(props) {
@@ -92,6 +90,7 @@ export default class Dashboard extends Component {
                         name: data.name,
                         type: data.type,
                         members: data.members,
+                        invited: data.invited
                     });
                 });
 

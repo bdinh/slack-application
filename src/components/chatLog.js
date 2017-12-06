@@ -5,6 +5,7 @@ import { HashLoader } from 'react-spinners';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
+// Component that contains the messages submitted for a certain channel
 export default class ChatLog extends Component {
     constructor(props) {
         super(props);
@@ -26,20 +27,19 @@ export default class ChatLog extends Component {
         this.props.inviteUserCallback(this.state.value);
     }
 
-
     render() {
 
         const {
             allUsers,
+            channelType,
+            deleteCallback,
             displayName,
             inviteState,
-            messagesArray,
-            channelType,
-            userId,
-            deleteCallback,
             editCallback,
             editCancelCallback,
             editCheckCallback,
+            messagesArray,
+            userId,
             validUserPrompt,
         } = this.props;
 

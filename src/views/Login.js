@@ -4,8 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import $ from 'jquery';
 import { HashLoader } from 'react-spinners';
 
-
-
+// Component that allows the user to sign into the application
 export default class LoginView extends Component {
     constructor(props) {
         super(props);
@@ -21,9 +20,6 @@ export default class LoginView extends Component {
 
     componentDidMount() {
         $('.login-button').prop('disabled', true);
-        // this.setState({
-        //     loading: false
-        // });
     }
 
     handleLoading() {

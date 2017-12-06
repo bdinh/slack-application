@@ -5,7 +5,8 @@ import UserTab from '../components/userTab';
 import { NavLink } from 'react-router-dom';
 import 'firebase/auth';
 
-
+// Component that contains the navigation bar of the application where
+// the user can navigate between channels
 export default class NavigationMenu extends Component {
     constructor(props) {
         super(props);
@@ -31,7 +32,7 @@ export default class NavigationMenu extends Component {
                     type: channel.type
                 });
             } else {
-                let membersArray = Object.values(channel.members).map((member) => {
+                let membersArray = Object.values(channel.invited).map((member) => {
                     return member.userId;
                 });
 
@@ -73,7 +74,7 @@ export default class NavigationMenu extends Component {
                                         return (
                                             <NavLink key={key} to={'/channels/' + channel.name}>
                                                 <div className="channel-util-container channel-link-container row">
-                                                    <div className="col-2"></div>
+                                                    <div className="col-2"/>
                                                     <div className="channel-container col-8">
                                                     <li className="channel-link" key={key}>
                                                         {channel.type === "public" ?

@@ -7,7 +7,7 @@ import Toggle from 'react-toggle';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-
+// Component view that allows the user to create a channel
 export default class CreateChannel extends Component {
     constructor(props) {
         super(props);
@@ -56,7 +56,7 @@ export default class CreateChannel extends Component {
         };
 
         let newChannelKey = channelsRef.push(insertChannel).key;
-        let membersRef = firebase.database().ref('channels/' + newChannelKey + '/members/');
+        let membersRef = firebase.database().ref('channels/' + newChannelKey + '/invited/');
 
         firebase.database().ref('channels/' + newChannelKey + '/').update({
             id: newChannelKey
@@ -71,12 +71,22 @@ export default class CreateChannel extends Component {
         });
 
         // Add self to channel members
-        membersRef.push({
+        firebase.database().ref('channels/' + newChannelKey + '/members').push({
             displayName: this.props.displayName,
             userId: this.props.userId,
             userEmail: this.props.userEmail
         });
 
+        let messagesRef = firebase.database().ref('channels/' + newChannelKey + "/messages");
+        messagesRef.push({
+            createdBy: {
+                name: this.props.displayName,
+                id: this.props.userId,
+                email: this.props.userEmail
+            },
+            timeStamp: Date.now(),
+            text: "welcome"
+        });
 
         this.setState({
             createdChannel: true,

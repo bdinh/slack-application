@@ -4,7 +4,7 @@ import $ from 'jquery';
 import { Redirect } from 'react-router-dom';
 import { HashLoader } from 'react-spinners';
 
-
+// Component that allows the user to sign up to use the application
 export default class SignUpView extends Component {
     constructor(props) {
         super(props);

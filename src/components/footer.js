@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+//Standard footer component I use for my applications
 export default class Footer extends Component {
     constructor(props) {
         super(props);
