@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 
+// Component that will act as a user profile button in our messaging application
 export default class UserTab extends Component {
     constructor(props) {
         super(props);
     }
-
-    // componentWillReceiveProps(nextProps) {
-    //     // if (this.props.displayName !== nextProps.displayName) {
-    //     //     this.setState({
-    //     //         displayName: nextProps.displayName,
-    //     // });
-    //     // }
-    // }
 
     render() {
 

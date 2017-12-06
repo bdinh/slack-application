@@ -1,26 +1,13 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
-import firebase from 'firebase/app';
-import { bindAll } from 'lodash';
 import moment from 'moment';
 
+
+// Component that encapsulates a input text box along with a button to simulate
+// a the ability to submit write and submit messages.
 export default class UtilityBar extends Component {
     constructor(props) {
         super(props);
-
-        // bindAll(this, [
-        //     'submitMessage'
-        // ])
     }
-
-    componentDidMount() {
-
-    }
-
-    queryDisplayObject() {
-
-    }
-
 
     render() {
 

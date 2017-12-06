@@ -98,7 +98,7 @@ ul {
 
 }
 
-button.signup-button.disabled, button.login-button.disabled {
+button.signup-button.disabled, button.login-button.disabled  {
     background-color: #3EB890!important;
     border-color: #37a581;
 }
@@ -164,7 +164,7 @@ textarea.text-input {
 
 }
 
-.send-button, .sign-out-button, .join-channel-button {
+.send-button, .sign-out-button, .join-channel-button, .invite-channel-button, .popup-invite-button {
     background-color: #3EB890;
     color: #FFFFFF;
     font-size: 0.5em!important;
@@ -179,7 +179,6 @@ div.form-group {
     margin: 0;
     padding-left: 1em;
     height: 100%;
-    /*margin-bottom: 1em;*/
 }
 
 .plus-icon {
@@ -263,7 +262,7 @@ div.form-group {
 }
 
 .chat {
-    padding: 1em;
+    padding: 0.5em;
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start;
@@ -288,10 +287,8 @@ div.form-group {
 }
 
 .chat-message {
-    padding: 15px;
-    /*border: 3px solid #dddddd;*/
+    padding: 0.5em;
     border-left: 3px solid #dddddd;
-    /*border-radius: 10px;*/
 }
 
 
@@ -327,15 +324,19 @@ div.form-group {
     color: rgba(255,255,255,0.15);
 }
 
+.welcome-chat {
+    padding: 0.5em;
+    padding-left: 2em;
+    font-size: 1em;
+    width: 100%;
+}
+
 .ul {
     padding: 0!important;
     list-style-type: none;
     -webkit-padding-start: 0!important;
 }
 
-.channel-link-container {
-    /*padding-left: 2.5em;*/
-}
 
 .channel-link-container:hover {
     background-color: #564A54;
@@ -354,8 +355,6 @@ div.form-group {
 .chat-icon:hover {
     border-bottom: 1.5px solid #dddddd;
     padding-bottom: 2px;
-    /*text-decoration: underline;*/
-    /*text-decoration-color: #dddddd;*/
 }
 
 .event-container {
@@ -596,6 +595,38 @@ div.form-group-spacing {
     text-align: center;
 }
 
+.invite-container {
+    text-align: center;
+}
+
+.invite-popup-padding {
+    height: 100%;
+    width: 70%;
+}
+
+.invite-popup {
+    position: absolute;
+    padding: 1em;
+    height: 70%;
+    width: 30%;
+    background-color: #FFFFFF;
+    box-shadow: 0 0px 1px 2px rgba(0,0,0,0.12);
+
+}
+
+.invite-popup-padding, .invite-popup {
+    display: inline-block;
+}
+
+.invite-popup-text {
+    margin-bottom: 1em;
+}
+
+.popup-invite-button-container {
+    text-align: center;
+    margin: 1em;
+}
+
 @media (min-width: 598px) {
     .header-channel-title {
         font-size: 1.25em;
@@ -621,7 +652,8 @@ div.form-group-spacing {
         margin-left: 0.25em;
     }
 
-    .sign-out-button, .send-button, .channel-cancel-button, .channel-create-button, .join-channel-button {
+    .sign-out-button, .send-button, .channel-cancel-button, .channel-create-button,
+    .join-channel-button, .invite-channel-button, .popup-invite-button {
         font-size: 0.75em!important;
     }
 
@@ -734,7 +766,8 @@ div.form-group-spacing {
     }
 
 
-    .sign-out-button, .send-button, .channel-cancel-button, .channel-create-button, .join-channel-button {
+    .sign-out-button, .send-button, .invite-channel-button, .channel-cancel-button,
+    .channel-create-button, .join-channel-button, .popup-invite-button {
         font-size: 1em!important;
     }
 

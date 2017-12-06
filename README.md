@@ -1,5 +1,10 @@
 # Chat
 
-This repository contains code for a web app that allows users to chat in real-time, created for the [Client-Side Web Development](https://canvas.uw.edu/courses/1118282) course at the UW iSchool.
+### Project Description: 
+By utilizing react-router and Firebase, I was able create a single-page messaging application that resembles
+that of the [Slack](https://slack.com/). The design and features of the application derives from Slack 
+with minor subtle adjustments. This was intentional and was primarily used as a means of implementation
+practice. This messaging application supports private and public channels with a feature that supports adding
+new users to respective channels. Users are also allowed to edit and delete messages that are created by them.
 
-The site can be viewed at <https://info343b-a17.github.io/chat-yourusername/>
+The site can be viewed at [here](https://info343b-a17.github.io/chat-bdinh/)

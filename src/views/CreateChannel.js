@@ -83,13 +83,12 @@ export default class CreateChannel extends Component {
             activeChannel: channelName,
         });
 
-        let redirectUrl = 'channels/#' + channelName;
-        return <Redirect to='/' exact/>
+        // let redirectUrl = 'channels/' + channelName;
+        // return <Redirect to={'/' + redirectUrl} exact/>
     }
 
     handleCreateButton(event) {
         let channelName = event.target.value;
-        console.log(channelName);
         if (channelName.length > 1) {
             $('.channel-create-button').prop('disabled', false);
         } else {
@@ -101,14 +100,10 @@ export default class CreateChannel extends Component {
         this.setState({
             publicChannel: event.target.checked
         });
-        // console.log(event.target.checked);
     }
 
     handleSelectChange (value) {
-        console.log('You\'ve selected:', value);
         this.setState({ value });
-        console.log(this.state);
-
     }
 
     render() {
@@ -123,7 +118,7 @@ export default class CreateChannel extends Component {
         }
 
         if (this.state.createdChannel) {
-            return <Redirect to={'/channel/' + this.state.activeChannel} />
+            return <Redirect to={'/channels/' + this.state.activeChannel} exact/>
         }
 
         return (

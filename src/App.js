@@ -48,7 +48,6 @@ class App extends Component {
 
     componentDidMount() {
         this.checkUserAuth();
-
     }
 
 
@@ -138,12 +137,6 @@ class App extends Component {
                         userId: user.uid,
                         userEmail: user.email
                     });
-                    //
-                    // firebase.database().ref('channels/-L-V7Vj5_0P-XL_mbZ1V/members').push({
-                    //     displayName: user.displayName,
-                    //     userId: user.uid,
-                    //     userEmail: user.email
-                    // });
 
                     this.updateUserList();
 
@@ -194,24 +187,27 @@ class App extends Component {
                         displayName={this.state.displayName}
                         userId={this.state.userId}
                         userEmail={this.state.email}
+                        allUsers={this.state.allUsers}
                         signOutCallback={this.signOutCallback} />)
             )}/>
-            <Route exact path='/channel' render={(routerProps) => (
+            <Route exact path='/channels' render={(routerProps) => (
                 ( <Dashboard
                     {...routerProps}
                     activeSession={this.state.activeSession}
                     displayName={this.state.displayName}
                     userId={this.state.userId}
                     userEmail={this.state.email}
+                    allUsers={this.state.allUsers}
                     signOutCallback={this.signOutCallback} />)
             )}/>
-            <Route path='/channel/:channelName' render={(routerProps) => (
+            <Route path='/channels/:channelName' render={(routerProps) => (
                 ( <Dashboard
                     {...routerProps}
                     activeSession={this.state.activeSession}
                     displayName={this.state.displayName}
                     userEmail={this.state.email}
                     userId={this.state.userId}
+                    allUsers={this.state.allUsers}
                     signOutCallback={this.signOutCallback} />)
             )}/>
           <Route path='/login' exact render={(routerProps) => (

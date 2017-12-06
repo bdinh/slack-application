@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 import '../css/font-awesome/css/font-awesome.css';
 import UserTab from '../components/userTab';
-import { Redirect, NavLink } from 'react-router-dom';
-import firebase from 'firebase/app';
+import { NavLink } from 'react-router-dom';
 import 'firebase/auth';
 
 
@@ -15,42 +14,6 @@ export default class NavigationMenu extends Component {
         }
     }
 
-    // componentDidMount() {
-    //
-    //     let channels = [];
-    //     let channelsRef = firebase.database().ref('channels');
-    //     channelsRef.once('value')
-    //         .then((snapshot) => {
-    //             let channelObj = snapshot.val();
-    //             snapshot.forEach((channel) => {
-    //                 // debugger;
-    //                 channels.push(channel.key);
-    //             });
-    //
-    //             channels.reverse();
-    //             this.setState({
-    //                 channels: channels
-    //             });
-    //             console.log(this.state);
-    //
-    //             // debugger;
-    //         });
-    //
-    //     // console.log(channelsRef.child('general'));
-    //
-    //
-    // }
-
-
-
-    signOut() {
-        // console.log("testing");
-        //sign out a user
-        // firebase.auth().signOut()
-        //     .catch(err => console.log(err)); //log any errors for debugging
-        // return (<Redirect to='/' exact/>)
-    }
-
     render() {
 
         const {
@@ -60,7 +23,6 @@ export default class NavigationMenu extends Component {
             userId
         } = this.props;
 
-        // Check each private channel to see if the user is allowed to access
         let updatedChannel = [];
         channels.forEach((channel) => {
             if (channel.type === "public") {
@@ -69,7 +31,6 @@ export default class NavigationMenu extends Component {
                     type: channel.type
                 });
             } else {
-                console.log(Object.values(channel.members));
                 let membersArray = Object.values(channel.members).map((member) => {
                     return member.userId;
                 });
@@ -82,8 +43,6 @@ export default class NavigationMenu extends Component {
                 }
             }
         });
-
-        console.log(updatedChannel);
 
         return (
             <div className="channel-navigation-container">
@@ -112,7 +71,7 @@ export default class NavigationMenu extends Component {
                                 <ul>
                                     {updatedChannel.map((channel, key) => {
                                         return (
-                                            <NavLink key={key} to={'/channel/' + channel.name}>
+                                            <NavLink key={key} to={'/channels/' + channel.name}>
                                                 <div className="channel-util-container channel-link-container row">
                                                     <div className="col-2"></div>
                                                     <div className="channel-container col-8">

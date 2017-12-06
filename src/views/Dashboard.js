@@ -8,6 +8,7 @@ import firebase from 'firebase/app';
 import { Redirect } from 'react-router-dom';
 import { bindAll } from 'lodash';
 import $ from 'jquery';
+import moment from 'moment';
 
 
 export default class Dashboard extends Component {
@@ -17,6 +18,7 @@ export default class Dashboard extends Component {
             activeChannel: "general",
             activeChannelId: "",
             channelPurpose: "",
+            channelDetail: {},
             messagesArray: [],
             channels: [],
             validChannel: true,
@@ -24,6 +26,9 @@ export default class Dashboard extends Component {
             validUser: false,
             displayObject: {},
             chatLoading: false,
+            publicChannel: true,
+            value: [],
+            inviteState: false,
         };
         bindAll(this, [
             'updateDashBoard',
@@ -34,7 +39,9 @@ export default class Dashboard extends Component {
             'editCancelCallback',
             'editCheckCallback',
             'joinChannel',
-            'updateChannelUsers'
+            'updateChannelUsers',
+            'toggleInvite',
+            'inviteUsers'
         ])
     }
 
@@ -44,7 +51,28 @@ export default class Dashboard extends Component {
         }
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        if (this.state.activeChannel !== nextProps.match.params.channelName
+            && nextProps.match.params.channelName !== undefined
+            && this.props.match.params.channelName !== undefined) {
+            this.setState({
+                activeChannel: nextProps.match.params.channelName,
+            });
+            this.updateDashBoard();
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.match.params.channelName !== nextProps.match.params.channelName) {
+            this.setState({
+                activeChannel: nextProps.match.params.channelName,
+            });
+            this.updateDashBoard();
+        }
+    }
+
     updateDashBoard() {
+        $('.hash-container').show();
         let channels = [];
         let displayObj = {};
         let channelsRef = firebase.database().ref('channels');
@@ -52,9 +80,11 @@ export default class Dashboard extends Component {
             .then((snapshot) => {
                 let activeChannelId = "";
 
+                let channelDetail = {};
                 snapshot.forEach((channel) => {
                     let data = channel.val();
                     if (data.name === this.state.activeChannel) {
+                        channelDetail = data;
                         activeChannelId = data.id;
                         displayObj.time = data.timeStamp;
                     }
@@ -66,6 +96,7 @@ export default class Dashboard extends Component {
                 });
 
                 this.setState({
+                    channelDetail: channelDetail,
                     channels: channels,
                     activeChannelId: activeChannelId,
                 });
@@ -96,16 +127,6 @@ export default class Dashboard extends Component {
             });
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.match.params.channelName !== nextProps.match.params.channelName) {
-
-            this.setState({
-                activeChannel: nextProps.match.params.channelName,
-            });
-            this.updateDashBoard();
-        }
-    }
-
     updateMessagesArray() {
         let messages = [];
         let allMessagesRef = firebase.database().ref('channels/' + this.state.activeChannelId + '/messages');
@@ -121,16 +142,17 @@ export default class Dashboard extends Component {
 
             this.setState({
                 chatLoading: false
-            })
-            console.log(this.state.messagesArray);
+            });
         });
+        $('.hash-container').hide();
     }
 
 
 
     submitMessage() {
-        let message = $('.text-input').val();
+        $('.hash-container').show();
 
+        let message = $('.text-input').val();
         this.setState({
             chatLoading: true
         })
@@ -152,7 +174,6 @@ export default class Dashboard extends Component {
         });
 
         $('.text-input').val("");
-
         this.updateMessagesArray();
 
     }
@@ -170,10 +191,6 @@ export default class Dashboard extends Component {
     editMessage(event) {
         let editIndex = event.target.id.substring(12);
         let editMessage = this.state.messagesArray[editIndex];
-
-        // let editRefId = editMessage.refId;
-        // let editRef = firebase.database().ref('channels/' + this.state.activeChannel + '/messages/' + editRefId);
-
 
         editMessage.edited = true;
         let updateMessageArray = this.state.messagesArray;
@@ -235,12 +252,10 @@ export default class Dashboard extends Component {
                         validUser: false
                     })
                 }
-
         })
     }
 
     joinChannel() {
-
         let addRef = firebase.database().ref('channels/' + this.state.activeChannelId + '/members/');
         addRef.push({
             displayName: this.props.displayName,
@@ -248,8 +263,45 @@ export default class Dashboard extends Component {
             userId: this.props.userId
         });
 
+        let user = firebase.auth().currentUser;
+        let userDisplayName = user.displayName;
+        let userEmail = user.email;
+        let userId = user.uid;
+
+        let messagesRef = firebase.database().ref('channels/' + this.state.activeChannelId + "/messages");
+        messagesRef.push({
+            createdBy: {
+                name: userDisplayName,
+                id: userId,
+                email: userEmail
+            },
+            timeStamp: Date.now(),
+            text: "welcome"
+        });
+        this.updateDashBoard();
+    }
+
+    toggleInvite() {
+        this.setState({
+            inviteState: !this.state.inviteState
+        });
+    }
+
+    inviteUsers(usersArray) {
+        let membersRef = firebase.database().ref('channels/' + this.state.activeChannelId + '/members/');
+        usersArray.forEach((user) => {
+            membersRef.push({
+                displayName: user.label,
+                userEmail: user.email,
+                userId: user.value,
+            });
+        });
+
         this.updateDashBoard();
 
+        this.setState({
+            inviteState: false
+        })
     }
 
 
@@ -257,6 +309,7 @@ export default class Dashboard extends Component {
 
         const {
             activeSession,
+            allUsers,
             signOutCallback,
             displayName,
             userId,
@@ -270,9 +323,12 @@ export default class Dashboard extends Component {
             return <Redirect to='/channel/general'/>
         }
 
-        // if (activeChannel !== "general" || !test || activeSession) {
-        //     return <Redirect to='/login'/>
-        // }
+        let updatedUsers = [];
+        allUsers.forEach((user) => {
+            if (!this.state.channelUsers.includes(user.value)) {
+                updatedUsers.push(user)
+            }
+        });
 
         return(
             <div className="row dashboard-container">
@@ -288,12 +344,17 @@ export default class Dashboard extends Component {
                 <div className="col-8 col-md-8 col-xl-9 chat-panel">
                     <ChatHeader
                         activeChannel={this.state.activeChannel}
+                        channelType={this.state.channelDetail.type}
                         channelPurpose={this.state.channelPurpose}
                         channelUsers={this.state.channelUsers}
+                        toggleInvite={this.toggleInvite}
+                        inviteState={this.state.inviteState}
                     />
 
                     <ChatLog
-                        chatLoading={this.state.chatLoading}
+                        allUsers={updatedUsers}
+                        channelType={this.state.channelDetail.type}
+                        inviteState={this.state.inviteState}
                         validUserPrompt={this.state.validUser}
                         displayName={displayName}
                         messagesArray={this.state.messagesArray}
@@ -303,7 +364,9 @@ export default class Dashboard extends Component {
                         editCallback={this.editMessage}
                         editCancelCallback={this.editCancelCallback}
                         editCheckCallback={this.editCheckCallback}
-                    />
+                        inviteUserCallback={this.inviteUsers}
+
+                />
                     <UtilityBar
                         activeChannelId={this.state.activeChannelId}
                         displayObject={this.state.displayObject}
