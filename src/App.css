@@ -605,7 +605,9 @@ div.form-group-spacing {
 }
 
 .invite-popup {
-    position: absolute;
+    position: fixed;
+    right: 0;
+    z-index: 1;
     padding: 1em;
     height: 70%;
     width: 30%;

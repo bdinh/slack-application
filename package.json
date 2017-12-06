@@ -2,9 +2,11 @@
   "name": "chat-bdinh",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://info343b-a17.github.io/chat-bdinh/",
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
     "firebase": "^4.6.2",
+    "gh-pages": "^1.1.0",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "md5": "^2.2.1",
@@ -23,6 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
