@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { bindAll } from 'lodash';
 import $ from 'jquery';
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import { Redirect } from 'react-router-dom';
+import { HashLoader } from 'react-spinners';
+
 
 export default class SignUpView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
-            password: "",
-            displayName: "",
-            validCredential: false,
+            activeSession: false,
+            loading: false,
         };
         bindAll(this, [
-            'checkCredentials'
+            'handleLoading'
         ]);
     }
 
@@ -27,35 +26,48 @@ export default class SignUpView extends Component {
         }
     }
 
-    checkCredentials(event) {
-        let email = $('#createEmail').val();
-        let password = $('#createPassword').val();
-        let displayName = $('#createDisplayName').val();
+    componentDidMount() {
+        $('.signup-button').prop('disabled', true);
+        this.setState({
+            loading: false
+        });
+    }
 
-        console.log("hello");
+    handleLoading() {
+        this.setState({
+            loading: true
+        });
 
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((firebaseUser) => {
-                console.log('User created: ' + firebaseUser.uid);
-                firebaseUser.updateProfie({
-                    displayName: displayName,
-                })
+        this.props.signUpCallback();
 
-            })
-            .catch((error) => { //report any errors
-                console.log(error.message);
-            });
+    }
 
+    componentWillUnmount() {
+        this.setState({
+            loading: false
+        })
     }
 
 
     render() {
 
+        const {
+            activeSession,
+            errorMessage
+        } = this.props;
 
+        if (activeSession) {
+            return <Redirect to="/" exact />
+        }
         return (
         <div className="container form-container col-6 offset-3">
-            <form onSubmit={this.checkCredentials}>
-
+                <div className="hash-container">
+                    <HashLoader
+                        loading={errorMessage === "" && this.state.loading}
+                        size={75}
+                        color={"#3EB890"}
+                    />
+                </div>
                 <div className="form-group">
                     <label
                         className="form-labels"
@@ -71,7 +83,7 @@ export default class SignUpView extends Component {
                         placeholder="Enter Display Name"
                     />
                 </div>
-                <div className="form-group">
+                <div className="form-group form-group-spacing">
                     <label className="form-labels" htmlFor="createEmail">Email address</label>
                     <input
                         type="email"
@@ -81,7 +93,7 @@ export default class SignUpView extends Component {
                         placeholder="Enter email"
                     />
                 </div>
-                <div className="form-group">
+                <div className="form-group form-group-spacing">
                     <label
                         className="form-labels"
                         htmlFor="createPassword">
@@ -96,11 +108,22 @@ export default class SignUpView extends Component {
                         onChange={this.checkPassword}
                     />
                 </div>
-                <button
-                    disabled={true}
-                    type="submit"
-                    className="btn btn-primary signup-button">Create Account</button>
-            </form>
+                <div className="form-group-spacing">
+                    <button
+                        className="btn btn-primary signup-button"
+                        onClick={this.handleLoading}
+                    >Create Account</button>
+                </div>
+                {
+                    errorMessage !== "" ?
+                        (
+                            <div className="error-handling">
+                                <p>{errorMessage.message}</p>
+                            </div>
+                        )
+                        : (" ")
+                }
+
         </div>
         );
     }

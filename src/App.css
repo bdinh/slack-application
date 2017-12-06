@@ -1,5 +1,12 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+p {
+    margin: 0!important;
 }
 
 .App {
@@ -11,12 +18,15 @@
 }
 
 .form-container {
-    margin-top: 3em;
+    margin-top: 2em;
 }
 
-.new-account-text {
+.new-account-text-container {
+    padding-top: 1em;
     text-align: center;
 }
+
+
 
 .login-button, .signup-button {
     width: 100%;
@@ -28,11 +38,11 @@
 
 .faded-text {
     color: #868e96;
+    font-size: 0.5em;
 }
 
 .navigation-menu {
     height: 100%;
-    border: 1px solid black;
     padding: 0!important;
     background-color: #443642;
     color: rgba(255,255,255,0.15);
@@ -41,32 +51,56 @@
 .user-settings {
     height: 10%;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    border: 1px solid transparent;
 }
 
 .channel-navigation {
-    height: 90%;
-    font-size: 1.5em;
-    /*text-align: center;*/
-    padding-top: 1em;
-    margin-left: 2em;
+    height: 80%;
+    font-size: 0.75em;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.sign-out-container {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .user-button {
-    /*text-align: center;*/
-    margin-top: 0.5em;
-    font-size: 2em;
-    margin-left: 2em;
+    font-size: 0.75em;
+}
+
+.user-button-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5em;
+}
+
+.text-area.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 ul {
     list-style-type: none;
 }
 
-.sign-out-button {
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 1em;
+.signup-button, .login-button {
+    background-color: #77cdb1!important;
+    border-color: #64c6a6!important;
+
+}
+
+button.signup-button.disabled, button.login-button.disabled {
+    background-color: #3EB890!important;
+    border-color: #37a581;
 }
 
 .chat-header {
@@ -84,7 +118,12 @@ ul {
     height: 10%;
     background-color: #dddddd;
     box-shadow: 0 0px 5px 0 rgba(0,0,0,0.12), 0 0px 5px 0 rgba(0,0,0,0.24);
+}
 
+.chat-utility-grow {
+    height: 15%;
+    background-color: #dddddd;
+    box-shadow: 0 0px 5px 0 rgba(0,0,0,0.12), 0 0px 5px 0 rgba(0,0,0,0.24);
 }
 
 .chat-display {
@@ -92,18 +131,20 @@ ul {
     background-color: #dddddd6b;
 }
 
+.chat-display-shrink {
+    height: 75%;
+    background-color: #dddddd6b;
+}
+
 textarea.text-input {
     border-radius: 20px;
-    /*display: inline-block;*/
 }
 
 .input-container {
-    width: 85%;
+    width: 70%;
     display: inline-block;
-    /*margin-top: 1em;*/
     height: 100%;
-    /*margin-left: 1em;*/
-    padding-top: 1em;
+    padding: 0.25em;
 }
 
 .send-button-container {
@@ -113,26 +154,656 @@ textarea.text-input {
     height: 100%;
 }
 
+
+
 .inline-container {
-    width: 15%;
+    width: 25%;
     text-align: center;
     display: inline-block;
     height: 100%;
 
 }
 
-.send-button, .sign-out-button {
-    position: absolute;
+.send-button, .sign-out-button, .join-channel-button {
     background-color: #3EB890;
     color: #FFFFFF;
+    font-size: 0.5em!important;
 }
 
-.send-button {
-    font-size: 1.5em;
+.send-button, .sign-out-button {
+    position: absolute;
+
 }
 
 div.form-group {
     margin: 0;
     padding-left: 1em;
     height: 100%;
+    /*margin-bottom: 1em;*/
+}
+
+.plus-icon {
+    font-size: 0.75em;
+    width: 1.5em;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+}
+
+.fa-plus {
+    font-size: 1em!important;
+    margin-left: 0.15em;
+}
+
+.channel-title, .channel-button {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    padding-top: 1em;
+    font-size: 1em;
+}
+
+.channel-util-container {
+    margin: 0!important;
+}
+
+.channel-navigation-container {
+    height: 100%;
+}
+
+.label-container {
+    margin-top: 5em;
+}
+
+.create-channel-title {
+    font-size: 3em;
+}
+
+.channel-button-container {
+    padding: 0!important;
+}
+
+.create-channel-button-container {
+    padding: 0!important;
+    margin-top: 1em;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.create-channel-text {
+    font-size: 1em;
+    color: #dddddd;
+}
+
+.channels-container {
+    height: 100%;
+    width: 100%;
+}
+
+.button-section {
+    width: 100%;
+}
+
+.channel-create-button {
+    background-color: #3EB890;
+    color: #FFFFFF;
+    margin-left: 1em;
+}
+
+
+.plus-icon > a,.plus-icon > a:hover {
+    color: rgba(255,255,255,0.15);
+}
+
+.chat-log {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.chat {
+    padding: 1em;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+}
+
+.chat:hover {
+    background-color: #b4aeb3;
+}
+
+.user-photo {
+    height: 40px;
+    width: 40px;
+    background-color: #0e90d2;
+    border-radius: 10px;
+    margin-right: 2em;
+    margin-left: 1em;
+    overflow: hidden;
+}
+
+.user-photo img {
+    width: 100%;
+}
+
+.chat-message {
+    padding: 15px;
+    /*border: 3px solid #dddddd;*/
+    border-left: 3px solid #dddddd;
+    /*border-radius: 10px;*/
+}
+
+
+.name-display {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.time-display, .edited-display {
+    margin-left: 1em;
+    font-size: 1em;
+    color: #6E6E6E;
+}
+
+.user-photo {
+    margin-top: 0.5em;
+}
+
+.chat-header {
+    padding: 1em;
+}
+
+.header-channel-title {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#channel-cancel {
+    background-color: #dddddd;
+}
+
+.channel-link, .channel-link > a:hover {
+    color: rgba(255,255,255,0.15);
+}
+
+.ul {
+    padding: 0!important;
+    list-style-type: none;
+    -webkit-padding-start: 0!important;
+}
+
+.channel-link-container {
+    /*padding-left: 2.5em;*/
+}
+
+.channel-link-container:hover {
+    background-color: #564A54;
+}
+
+.chat-utilities-container {
+    font-size: 1.5em;
+    text-align: center;
+
+}
+
+.edit-icon {
+    margin-right: 1em;
+}
+
+.chat-icon:hover {
+    border-bottom: 1.5px solid #dddddd;
+    padding-bottom: 2px;
+    /*text-decoration: underline;*/
+    /*text-decoration-color: #dddddd;*/
+}
+
+.event-container {
+    display: inline-block;
+}
+
+.edit-icon {
+    line-height: 1.25em!important;
+}
+
+
+a {
+    text-decoration: none!important;
+}
+
+.channel-container {
+    padding: 0!important;
+}
+
+.channel-padding {
+    padding: 0!important;
+}
+
+.channel-purpose {
+    font-size: 0.5em;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    background-color: #443642;
+    color: #FFFFFF;
+    height: 100px;
+}
+
+.footer {
+    padding-top: 1.5em;
+}
+
+.slack-style > a {
+    color: #3EB890!important;
+}
+
+
+.bao-link-style > a {
+    color: #34495E!important;
+}
+
+div.form-group-spacing {
+    margin-top: 1.5em;
+}
+
+.react-toggle {
+    touch-action: pan-x;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.react-toggle-screenreader-only {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.react-toggle--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    -webkit-transition: opacity 0.25s;
+    transition: opacity 0.25s;
+}
+
+.react-toggle-track {
+    width: 100px;
+    height: 30px;
+    padding: 0;
+    border-radius: 30px;
+    background-color: #FF5512;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+    background-color: #FF5512;
+}
+
+.react-toggle--checked .react-toggle-track {
+    background-color: #00AA5D;
+}
+
+.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+    background-color: #00AA5D;
+}
+
+.react-toggle-track-check {
+    color: #FFFFFF;
+    position: absolute;
+    width: 15px;
+    height: 10px;
+    top: 10px;
+    bottom: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+    line-height: 0;
+    left: 15px;
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease;
+    -moz-transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease;
+}
+
+.react-toggle--checked .react-toggle-track-check {
+    opacity: 1;
+    -webkit-transition: opacity 0.25s ease;
+    -moz-transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease;
+}
+
+.react-toggle-track-x {
+    color: #FFFFFF;
+    position: absolute;
+    height: 10px;
+    top: 10px;
+    bottom: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+    line-height: 0;
+    right: 15px;
+    opacity: 1;
+    -webkit-transition: opacity 0.25s ease;
+    -moz-transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease;
+}
+
+.react-toggle--checked .react-toggle-track-x {
+    opacity: 0;
+}
+
+.react-toggle-thumb {
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 28px;
+    height: 28px;
+    border: 1px solid #FF5512;
+    border-radius: 50%;
+    background-color: #FAFAFA;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+
+.react-toggle--checked .react-toggle-thumb {
+    left: 70px;
+    border-color: #00AA5D;
+}
+
+.toggle-label-container {
+    display: inline-block;
+}
+
+.toggle-label {
+    position: absolute;
+    top: 155px;
+    left: 150px;
+}
+
+.join-prompt-container {
+    text-align: center;
+    padding: 1em;
+}
+
+.join-channel-button-container {
+    padding: 1em;
+}
+
+.join-prompt-heading, .join-prompt-subheading {
+    display: inline-block;
+}
+
+.footer-container {
+    padding: 0!important;
+}
+
+.channel-name {
+    font-weight: bold;
+}
+
+.channel-link-icon {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+}
+
+.total-people-label {
+    font-size: 0.5em;
+    margin-left: 1em;
+}
+
+.hash-container {
+    position: absolute;
+    left: 45%;
+    top: 40%;
+}
+
+.new-account-text > a{
+    color: #3EB890;
+}
+
+.error-handling {
+    color: red;
+    margin-top: 1em;
+    text-align: center;
+}
+
+@media (min-width: 598px) {
+    .header-channel-title {
+        font-size: 1.25em;
+    }
+
+    .channel-purpose {
+        font-size: 0.75em;
+    }
+
+    .user-button-container {
+        padding: 1em;
+    }
+
+    .user-button {
+        font-size: 1.25em;
+    }
+
+    .channel-navigation {
+        font-size: 1.25em;
+    }
+
+    .fa-plus {
+        margin-left: 0.25em;
+    }
+
+    .sign-out-button, .send-button, .channel-cancel-button, .channel-create-button, .join-channel-button {
+        font-size: 0.75em!important;
+    }
+
+    .user-photo {
+        height: 45px;
+        width: 45px;
+    }
+
+    .chat-text {
+        width: 75%;
+    }
+
+    .name-display {
+        font-size: 1em;
+    }
+
+    .time-display, .edited-display {
+        font-size: 0.75em;
+    }
+
+    .chat-utilities-container {
+        text-align: right;
+        padding: 0 1.5em!important;
+    }
+
+    .chat-message {
+        font-size: 1em;
+    }
+
+    .input-container {
+        width: 75%;
+        padding: 0.75em;
+    }
+
+    .inline-container {
+        width: 20%;
+    }
+
+    .create-channel-title {
+        font-size: 2.5em;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .header-channel-title {
+        font-size: 1.5em;
+    }
+
+    .channel-purpose {
+        font-size: 0.75em;
+    }
+
+    .user-button-container {
+        padding: 1.25em;
+    }
+
+    .user-button {
+        font-size: 1.5em;
+    }
+
+    .channel-navigation {
+        font-size: 1.25em;
+    }
+
+
+    .user-photo {
+        height: 50px;
+        width: 50px;
+    }
+
+    .time-display, .edited-display {
+        font-size: 0.75em;
+    }
+
+    .chat-utilities-container {
+        text-align: center;
+        padding: 0!important;
+    }
+
+    .edit-icon {
+        margin-right: 0.75em;
+    }
+
+    .chat-text {
+        width: 80%;
+    }
+
+    .create-channel-title {
+        font-size: 3em;
+    }
+}
+
+
+@media (min-width: 992px) {
+    .header-channel-title {
+        font-size: 1.75em;
+    }
+
+    .channel-purpose {
+        font-size: 1em;
+    }
+
+    .user-button {
+        font-size: 1.75em;
+    }
+
+    .channel-navigation {
+        font-size: 1.5em;
+    }
+
+
+    .sign-out-button, .send-button, .channel-cancel-button, .channel-create-button, .join-channel-button {
+        font-size: 1em!important;
+    }
+
+    .user-photo {
+        height: 55px;
+        width: 55px;
+    }
+
+
+    .name-display {
+        font-size: 1.5em;
+    }
+
+    .time-display, .edited-display {
+        font-size: 0.75em;
+    }
+
+
+    .chat-message {
+        font-size: 1em;
+    }
+
+    .input-container {
+        width: 80%;
+    }
+
+}
+
+@media (min-width: 1200px) {
+
+    .user-button {
+        font-size: 2em;
+    }
+
+    .channel-navigation {
+        font-size: 1.5em;
+    }
+
+    .fa-plus {
+        margin-left: 0.28em;
+    }
+
+    .user-photo {
+        height: 60px;
+        width: 60px;
+    }
+
+    .chat-text {
+        width: 85%;
+    }
+
+    .time-display, .edited-display {
+        font-size: 1em;
+    }
+
+
+    .chat-message {
+        font-size: 1.25em;
+    }
+
+    .input-container {
+        width: 90%;
+    }
+
+    .inline-container {
+        width: 10%;
+    }
+
+    .user-button {
+        text-align: center;
+    }
 }
