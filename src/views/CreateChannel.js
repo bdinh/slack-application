@@ -62,13 +62,17 @@ export default class CreateChannel extends Component {
             id: newChannelKey
         });
 
-        this.state.value.forEach((member) => {
-            membersRef.push({
-                displayName: member.label,
-                userId: member.value,
-                userEmail: member.email
+        if (this.state.value.length !== 0) {
+            this.state.value.forEach((member) => {
+                membersRef.push({
+                    displayName: member.label,
+                    userId: member.value,
+                    userEmail: member.email
+                });
             });
-        });
+        }
+
+
 
         // Add self to channel members
         firebase.database().ref('channels/' + newChannelKey + '/members').push({

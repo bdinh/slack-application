@@ -24,25 +24,42 @@ export default class NavigationMenu extends Component {
             userId
         } = this.props;
 
+
         let updatedChannel = [];
         channels.forEach((channel) => {
+            console.log(channel);
             if (channel.type === "public") {
                 updatedChannel.push({
                     name: channel.name,
                     type: channel.type
                 });
             } else {
-                let membersArray = Object.values(channel.invited).map((member) => {
-                    return member.userId;
-                });
-
-                if (membersArray.includes(userId)) {
-                    updatedChannel.push({
-                        name: channel.name,
-                        type: channel.type
+                    // need to add those invited and those already a member
+                    let membersArray = Object.values(channel.members).map((member) => {
+                        return member.userId;
+                        console.log(member)
                     });
+
+                    if (membersArray.includes(userId)) {
+                        updatedChannel.push({
+                            name: channel.name,
+                            type: channel.type
+                        });
+                    }
+
+                    if (channel.invited) {
+                        let inviteArray = Object.values(channel.invited).map((member) => {
+                            return member.userId;
+                        });
+
+                        if (inviteArray.includes(userId)) {
+                            updatedChannel.push({
+                                name: channel.name,
+                                type: channel.type
+                            });
+                        }
+                    }
                 }
-            }
         });
 
         return (
