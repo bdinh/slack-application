@@ -2,7 +2,7 @@
   "name": "chat-bdinh",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://info343b-a17.github.io/chat-bdinh/",
+  "homepage": "https://bdinh.github.io/slack-application/",
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
     "firebase": "^4.6.2",

@@ -7,4 +7,4 @@ with minor subtle adjustments. This was intentional and was primarily used as a 
 practice. This messaging application supports private and public channels with a feature that supports adding
 new users to respective channels. Users are also allowed to edit and delete messages that are created by them.
 
-The site can be viewed at [here](https://info343b-a17.github.io/chat-bdinh/)
+The site can be viewed at [here](https://bdinh.github.io/slack-application/)
